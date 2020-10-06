@@ -1,0 +1,94 @@
+body{
+	font-family: 'Lato', sans-serif;
+}
+
+img
+{
+	width:30px;
+	height:30px;
+}
+
+.logo
+{
+	
+	background-color:#031B2C;
+	color:white;
+	text-align:center;
+	padding:2px;
+}
+
+.nav-link
+{
+	font-size: calc( 1.12vw + 1.12vh);
+	padding:5px;
+	
+
+}
+.text-responsive {
+  font-size: calc( 4vw + 4vh);
+}
+
+#zaloguj
+{
+	text-align:center;
+	font-size: calc( 1.1vw + 1.1vh);
+}
+#reg
+	{
+		text-align:center;
+		font-size: calc( 1.1vw + 1.1vh);
+	}
+.g-recaptcha
+	{
+		
+	 display: inline-block;
+	}
+	input[type=text], select 
+	{
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+	}
+	input[type=password]
+	{
+ width: 30%;
+padding: 12px 20px;
+margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+	}
+	input[type=submit]
+	{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+	}
+input[type=checkbox] {
+    padding-left:5px;
+    padding-right:5px;
+    -webkit-appearance:checkbox;
+   width:20px;
+    height:20px;
+}
+#show
+{
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+

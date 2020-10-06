@@ -1,0 +1,124 @@
+	//forgot_pass.php
+	
+
+			
+					if($ok == true) 
+					{
+						// Generuj vkey
+							$vkey = md5(time().$email);
+				
+						if($_SESSION['conn']->query("UPDATE persons set haslo = '$haslo_hash',vkey = '$vkey' WHERE email ='$email'"))
+
+						{
+							//Wyślij email
+							$subject = "Weryfikacja email";
+							$message = "<a href='http://localhost/praca/verify.php?vkey=$vkey'>Zmiana hasła</a>";
+							$headers = "From:akshadow9@gmail.com \r\n";
+							$headers .= "MIME-Version: 1.0" . "\r\n";
+							$headers .="Content-type:text/html;charset=UTF-8" . "\r\n";
+							
+							mail($email,$subject,$message,$headers);
+							
+							$_SESSION['prawidlowa_zmiana']=true;
+							header('Location:changed_true.php');
+							
+						}
+							else
+							{
+								throw new Exception($_SESSION['conn']->error);
+							}
+			
+					}
+						$_SESSION['conn']->close();
+			
+			
+		
+				}
+		}
+		catch(Exception $err)
+		{
+			
+			echo'<span style="color:red;"> Błąd serwera!.</span>';
+			echo'<br /> Informacja dla dev:'.$err;
+		}
+		
+		
+		
+ // registration.php
+ if($ok == true) //wszystkie testy zaliczone
+		{
+			// Generuj vkey
+			$vkey = md5(time().$email);
+			//dodajemy user'a do bazy
+			
+			if($_SESSION['conn']->query("INSERT INTO persons(id,user,haslo,email,telefon,vkey) VALUES(NULL,'$nazwa','$haslo_hash','$email','$tel','$vkey')"))
+			
+			{
+				//Wyślij email
+							$subject = "Weryfikacja email";
+							$message = "<a href='http://localhost/praca/verify.php?vkey=$vkey'>Zajerestruj konto</a>";
+							$headers = "From:akshadow9@gmail.com \r\n";
+							$headers .= "MIME-Version: 1.0" . "\r\n";
+							$headers .="Content-type:text/html;charset=UTF-8" . "\r\n";
+							
+							mail($email,$subject,$message,$headers);
+							
+							$_SESSION['prawidlowarejestracja']=true;
+							header('Location:witaj.php');
+				
+								
+			}
+				
+				
+			else
+			{
+				throw new Exception($_SESSION['conn']->error);
+			}
+		}
+				
+				$_SESSION['conn']->close();
+			}
+		}
+		catch(Exception $err)
+		{
+			
+			echo'<span style="color:red;"> Błąd serwera! Zajerestruj się później.</span>';
+			echo'<br /> Informacja dla dev:'.$err;
+		}
+	if($_SESSION['conn']->query("INSERT INTO persons VALUES(NULL,'$nazwa','$haslo_hash','$email','$tel','$vkey',NULL)"))
+
+//zaloguj.php
+
+<?php
+session_start();
+require_once "dbh.php";
+if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+{	
+	
+	$_SESSION['conn'] = new mysqli($servername, $username, $password , $dbname);
+	
+	$l = $mysqli->real_escape_string($_POST['login']);
+	$p = $mysqli->real_escape_string($_POST['password']);
+	$p = md5($p);
+	
+	$resultSet = $mysqli->query("SELECT * FROM persons WHERE user = '$l' AND haslo = '$p' LIMIT 1");
+	
+	if($resultSet->num_rows !=0)
+	{
+		$row = $resultSet->fetch_assoc();
+		$verified = $row['verify'];
+		
+		if($verify == 1)
+		{
+			//Kontynuuj
+			header('Location:index.php');
+		}
+		else
+		{
+			$error = "Konto nie zostało zweryfikowane!";
+		}
+	}
+	
+	exit();
+}
+?>

@@ -1,0 +1,16 @@
+{
+  "name": "angular-strona",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lite-server"
+  },
+  "author": "ja",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lite-server": "^2.5.4",
+    "mysql": "^2.17.1"
+  }
+}
